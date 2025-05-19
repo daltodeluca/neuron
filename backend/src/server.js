@@ -1,24 +1,21 @@
-require('dotenv').config();
-
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
+
+console.log('>> server.js iniciou');
+
 const pool = require('./config/db');
+const usersRouter = require('./routes/users');
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Neuron API está funcionando');
-});
+app.use('/users', usersRouter);
 
-app.get('/db-test', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT NOW()');
-    res.json({ serverTime: result.rows[0].now });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Erro ao conectar com o banco');
-  }
+app.get('/', (req, res) => {
+  res.send('AAAAAAAAAAAAAAAAAAAAANeuron API está funcionando');
 });
 
 const PORT = process.env.PORT || 3000;
