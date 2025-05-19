@@ -3,13 +3,15 @@ const router = express.Router();
 const pool = require('../config/db');
 console.log('users.js carregado');
 
+const bcrypt = require('bcrypt');
+
 router.post('/', async (req, res) => {
-console.log('POST /users chamado');
   try {
     const { email, password, name } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
     const result = await pool.query(
       'INSERT INTO users (email, password, name) VALUES ($1, $2, $3) RETURNING *',
-      [email, password, name]
+      [email, hashedPassword, name]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
