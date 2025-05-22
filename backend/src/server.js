@@ -7,6 +7,8 @@ console.log('>> server.js iniciou');
 const pool = require('./config/db');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const pagesRouter = require('./routes/pages');
+console.log('>> routes iniciaram');
 
 const app = express();
 
@@ -15,6 +17,8 @@ app.use(express.json());
 
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use('/pages', pagesRouter);
+console.log('>> routes carregadas');
 
 app.get('/', (req, res) => {
   res.send('Neuron API está funcionando');

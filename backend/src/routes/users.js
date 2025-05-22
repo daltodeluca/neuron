@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../config/db');
-console.log('users.js carregado');
 
 const bcrypt = require('bcrypt');
 
