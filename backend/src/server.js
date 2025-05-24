@@ -8,6 +8,7 @@ const pool = require('./config/db');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const pagesRouter = require('./routes/pages');
+const blocksRouter = require('./routes/blocks');
 console.log('>> routes iniciaram');
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/pages', pagesRouter);
+app.use('/blocks', blocksRouter);
 console.log('>> routes carregadas');
 
 app.get('/', (req, res) => {
